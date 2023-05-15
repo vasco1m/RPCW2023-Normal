@@ -1,0 +1,74 @@
+Exercício 1:Emprego Científico (API de dados)
+
+    1.1 Setup
+        Setup Base de Dados:
+        mongoimport -d scienceJobs -c contracts --file emprego-cientifico.json --jsonArray
+        17943 document(s) imported successfully. 0 document(s) failed to import.
+        db.contracts.find()
+
+    1.2 Queries (warm-up)
+        Quantos contratos estão na base de dados?
+
+        db.contracts.find().count()
+        17943
+        Também poderia ser usado o comando db.contracts.count(), mas gera um warning avisando que este método está 'deprecated'.
+
+        Quantos contratos foram realizados pela Universidade do Minho?
+
+        O NIPCInstituicao da Universidade do Minho é 502011378, logo a query:
+        db.contracts.find({NIPCInstituicao:502011378}).count()
+        deverá retornar o número de contratos realizados pela Universidade do Minho, que foi 1104.
+
+        Qual a lista das áreas das pessoas contratadas (ordenada alfabeticamente e sem repetições)? (AreaCNAEF)
+
+        db.contracts.distinct('AreaCNAEF').sort()
+
+        Qual a distribuição por ano dos contratos? (quantos contratos em cada ano)
+
+        db.contracts.aggregate([
+        {
+            $addFields: {
+            startDate: {
+                $dateFromString: {
+                dateString: "$DataInicioContrato",
+                format: "%d/%m/%Y"
+                }
+            }
+            }
+        },
+        {
+            $group: {
+            _id: { $year: "$startDate" },
+            count: { $sum: 1 }
+            }
+        },
+        {
+            $sort: { _id: 1 }
+        }
+        ])
+
+        Qual a distribuição dos contratos por instituição?
+
+        db.contracts.aggregate([
+        {
+            $group: {
+            _id: "$NomeInstituicao",
+            count: { $sum: 1 }
+            }
+        },
+        {
+            $sort: { count: -1 }
+        }
+        ])
+
+    1.3 API de dados
+        Este exercício encontra-se na pasta 'ex1', e para o correr é necessário:
+            - npm install
+            - npm start
+            Assim que correr estes comandos e a base de dados estiver funcional consoante a importação acima, a API estará pronta a ser executada.
+
+Exercício 2
+    Este exercício encontra-se na pasta 'ex2', e para o correr é necessário:
+        - npm install
+        - npm start
+        Assim que correr estes comandos e a base de dados e o exercício 1 estiverem funcionais consoante os passos acima, a aplicação estará pronta a ser executada.

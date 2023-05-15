@@ -1,0 +1,90 @@
+extends layout
+
+block content
+  h1(style="margin-bottom: 20px; margin-top: 20px") Detalhes Contrato
+    table.table.table-bordered.table-striped.custom-table(style="margin-top: 20px;")
+        tr
+          th ID
+          td #{contract._id}
+        tr
+          th Instituição
+          td #{contract.NomeInstituicao}
+        tr
+          th NIPC Instituição
+          td #{contract.NIPCInstituicao}
+        tr
+          th Nome Titular
+          td #{contract.NomeTitularContrato}
+        tr
+          th CienciaId
+          td #{contract.CienciaID}
+        tr
+          th ORCID
+          td #{contract.ORCID}
+        tr
+          th Link CienciaVitae
+          td 
+            a(href="https://" + contract.CienciaVitae, target="_blank")= contract.CienciaVitae
+        tr
+          th Carreira RPN
+          td #{contract.Carreira_RPN}
+        tr
+          th Categoria RPN
+          td #{contract.Categoria_RPN}
+        tr
+          th Vinculo RPN
+          td #{contract.Vinculo_RPN}
+        tr
+          th Regime Prestação Serviço
+          td #{contract.RegimePrestacaoServico}
+        tr
+          th Data Início
+          td #{contract.DataInicioContrato}
+        tr
+          th Data Fim
+          td #{contract.DataFimContrato}
+        tr
+          th ETI Renumerado
+          td contract.ETIremunerado}
+        tr
+          th Procedimento Vinculativo
+          td #{contract.ProcedimentoVinculacao}
+        tr 
+          th Areas Investigacao
+          td #{contract.AreasInvestigacao}
+        tr
+          th Nivel Formação
+          td #{contract.NivelFormação}
+        tr
+          th Instituição Ensino
+          td #{contract.InstituicaoEnsino}
+        tr
+          th País Instituição Ensino
+          td #{contract.PaisInstituição}
+        tr
+          th Ano Diploma
+          td #{contract.AnoDiploma}
+        tr
+          th Curso
+          td #{contract.Curso}
+        tr
+          th Area CNAEF
+          td #{contract.AreaCNAEF}
+        tr
+          th Area FORD
+          td #{contract.AreaFORD}
+        tr
+          th Provas Agregacao
+          td #{contract.ProvasAgregacao}
+        tr
+          th Titulo Especialista
+          td #{contract.TituloEspecialista}
+        tr
+          th Provas Coordenacao
+          td #{contract.ProvasCoordenacao}
+        tr
+          th Provas Aptidao
+          td #{contract.ProvasAptidao}
+    .btn.btn-primary(type="button", style="margin-top: 20px; margin-bottom: 20px;")
+        a.btn-info(href="/") Back to Contracts
+    
